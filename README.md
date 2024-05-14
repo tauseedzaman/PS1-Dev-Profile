@@ -18,7 +18,7 @@ To start using the PowerShell Developer Profile, follow these steps:
 1. Clone the repository to your local machine:
 
    ```sh
-   git clone https://github.com/yourusername/powershell-dev-profile.git
+   git clone https://github.com/tauseedzaman/PS1-Dev-Profile
    ```
 2. Import the profile in your PowerShell environment. Open PowerShell and run:
    ```sh
