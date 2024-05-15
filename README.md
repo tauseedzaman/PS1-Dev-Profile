@@ -1,16 +1,15 @@
-﻿# PowerShell Profile For Developers
+# PowerShell Profile For Developers
 
 ## Overview
 
 This repository contains a collection of useful PowerShell functions and aliases for developers. The goal is to provide a starting point for developers to customize their PowerShell profiles and share their own contributions.
 
-## Aliases
+## Index
 
-```sh
-cpwd    
-```
-
-Copies the current working directory path to the clipboard.
+1. [cpwd](#cpwd)
+2. [pas](#pas)
+3. [pa](#pa)
+4. [gpush](#gpush)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -32,6 +31,40 @@ To start using the PowerShell Developer Profile, follow these steps:
    Replace `<path-to-repo`> with the path to the cloned repository.
 
 3. Save and close the profile file. Then restart PowerShell, and you're ready to go!
+
+
+
+## Aliases
+
+#### <a name="cpwd">Copy Working Directory Path</a>
+
+```sh
+cpwd
+```
+Copies the current working directory path to the clipboard, making it easy to share or use in other commands.
+
+#### <a name="pas"></a>Start Laravel Development Server</a>
+
+```sh
+pas
+```
+Starts the Laravel development server, allowing you to quickly test and preview your application.
+
+#### <a name="pa"></a>Run PHP Artisan</a>
+
+```sh
+pa
+```
+
+Runs the PHP Artisan command-line tool for Laravel, providing a convenient way to manage and interact with your Laravel project.
+
+#### <a name="gpush"></a>Push Git Changes with Message
+
+```sh
+gpush <message>
+```
+Pushes local Git changes to the remote repository with a custom commit message, streamlining the Git workflow.
+
 
 ## Contribution Guidelines
 
