@@ -10,6 +10,7 @@ This repository contains a collection of useful PowerShell functions and aliases
 2. [pas](#pas)
 3. [pa](#pa)
 4. [gpush](#gpush)
+4. [touch](#touch)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -64,6 +65,13 @@ Runs the PHP Artisan command-line tool for Laravel, providing a convenient way t
 gpush <message>
 ```
 Pushes local Git changes to the remote repository with a custom commit message, streamlining the Git workflow.
+
+#### <a name="touch"></a>Create or Touch File, just like touch command in unix envirement
+
+```sh
+touch <filename>
+```
+create file if not argument is provided then temp.txt is created.
 
 
 ## Contribution Guidelines

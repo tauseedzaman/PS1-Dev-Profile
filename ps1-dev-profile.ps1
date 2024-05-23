@@ -85,6 +85,26 @@ function GitPush {
     git push
 }
 
+<#
+.SYNOPSIS
+    create file. if not argument is provided then temp.txt is created.
+.NOTES
+    Author: tauseedzaman
+    Date: 23/05/2024
+#>
+function createfile {
+    param(
+        [string]$fileName = "tmp.txt"
+    )
+
+    if (-not (Test-Path -Path "$fileName")) {
+        New-Item -Type File -Name "$fileName"
+    }
+    else {
+        Write-Host "$fileName already exists."
+    }
+}
+
 #================================================
 #                Aliases
 #================================================
@@ -92,3 +112,4 @@ Set-Alias -Name cpwd -Value Copy-CurrentPathToClipboard -Description "Copy curre
 Set-Alias -Name pas -Value Start-laravelDevelopmentServer -Description "Starts laravel development server"
 Set-Alias -Name pa -Value Start-ArtisanCommand -Description "runs php artisan in laravel project."
 Set-Alias -Name gpush -Value GitPush -Description "used to push git changes with one command passing message as a argument."
+Set-Alias -Name touch -Value createfile -Description "create file if not argument is provided then temp.txt is created."
