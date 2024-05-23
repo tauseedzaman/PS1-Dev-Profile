@@ -10,7 +10,9 @@ This repository contains a collection of useful PowerShell functions and aliases
 2. [pas](#pas)
 3. [pa](#pa)
 4. [gpush](#gpush)
-4. [touch](#touch)
+5. [touch](#touch)
+6. [phpserver](#phpserver)
+7. [pyserver](#pyserver)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -37,21 +39,21 @@ To start using the PowerShell Developer Profile, follow these steps:
 
 ## Aliases
 
-#### <a name="cpwd">Copy Working Directory Path</a>
+#### 💻<a name="cpwd">Copy Working Directory Path</a>
 
 ```sh
 cpwd
 ```
 Copies the current working directory path to the clipboard, making it easy to share or use in other commands.
 
-#### <a name="pas"></a>Start Laravel Development Server</a>
+#### 💻<a name="pas"></a>Start Laravel Development Server</a>
 
 ```sh
 pas
 ```
 Starts the Laravel development server, allowing you to quickly test and preview your application.
 
-#### <a name="pa"></a>Run PHP Artisan</a>
+#### 💻<a name="pa"></a>Run PHP Artisan</a>
 
 ```sh
 pa
@@ -59,19 +61,33 @@ pa
 
 Runs the PHP Artisan command-line tool for Laravel, providing a convenient way to manage and interact with your Laravel project.
 
-#### <a name="gpush"></a>Push Git Changes with Message
+#### 💻<a name="gpush"></a>Push Git Changes with Message
 
 ```sh
 gpush <message>
 ```
 Pushes local Git changes to the remote repository with a custom commit message, streamlining the Git workflow.
 
-#### <a name="touch"></a>Create or Touch File, just like touch command in unix envirement
+#### 💻<a name="touch"></a>Create or Touch File, just like touch command in unix envirement
 
 ```sh
 touch <filename>
 ```
 create file if not argument is provided then temp.txt is created.
+
+#### 💻<a name="phpserver"></a>Start PHP built-in web server
+
+```sh
+phpserver <port>
+```
+Start PHP built-in web server in the current folder, if port is not provided then default port is 8080
+
+#### 💻<a name="pyserver"></a>Start Python HTTP server
+
+```sh
+pyserver <port>
+```
+Start Python built-in Http server in the current folder, if port is not provided then default port is 8080
 
 
 ## Contribution Guidelines

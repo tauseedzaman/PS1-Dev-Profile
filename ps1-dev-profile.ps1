@@ -105,6 +105,34 @@ function createfile {
     }
 }
 
+<#
+.SYNOPSIS
+    Start PHP built-in web server
+.NOTES
+    Author: tauseedzaman
+    Date: 23/05/2024
+#>
+function PHP-Server {
+    param(
+        [string]$port = 8080
+    )
+    php -S localhost:$port
+}
+
+<#
+.SYNOPSIS
+    Start Python HTTP server
+.NOTES
+    Author: tauseedzaman
+    Date: 23/05/2024
+#>
+function py-server {
+    param(
+        [int]$port = 8080
+    )
+    python -m http.server $port
+}
+
 #================================================
 #                Aliases
 #================================================
@@ -113,3 +141,5 @@ Set-Alias -Name pas -Value Start-laravelDevelopmentServer -Description "Starts l
 Set-Alias -Name pa -Value Start-ArtisanCommand -Description "runs php artisan in laravel project."
 Set-Alias -Name gpush -Value GitPush -Description "used to push git changes with one command passing message as a argument."
 Set-Alias -Name touch -Value createfile -Description "create file if not argument is provided then temp.txt is created."
+Set-Alias -Name phpserver -Value PHP-Server -Description "Start PHP built-in web server"
+Set-Alias -Name pyserver -Value py-server -Description "Start Python HTTP server"
