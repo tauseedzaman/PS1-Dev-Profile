@@ -13,6 +13,7 @@ This repository contains a collection of useful PowerShell functions and aliases
 5. [touch](#touch)
 6. [phpserver](#phpserver)
 7. [pyserver](#pyserver)
+8. [gt](#gt)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -89,6 +90,30 @@ pyserver <port>
 ```
 Start Python built-in Http server in the current folder, if port is not provided then default port is 8080
 
+#### 💻<a name="gt"></a>Navigates to a specified folder based on partial name.
+
+```sh
+gt <some-folder>
+```
+The `gt` function searches for a folder whose name matches the specified partial name. If multiple matches are found, it prompts you to select one. Once a unique match is determined, it navigates directly to that folder.
+
+Before Using `gt`:
+Before using the `gt` function, it's recommended to run the Scane-Folders function. This function scans your user home directory and stores the paths of all subfolders in a file called folderPaths.txt. This file is used by the `gt` function to quickly locate folders based on partial names.
+
+To update folder paths, run:
+
+```sh
+Scane-Folders
+```
+
+*Example:*
+
+Suppose you want to navigate to a folder named "Documents" within your user directory, but you're not sure of the full path. You can simply use gt followed by the partial name:
+
+```sh
+gt Documents
+```
+If multiple folders with "Documents" in their names exist, `gt` will display them and prompt you to select the desired one. After selecting, you will be navigated to the chosen folder
 
 ## Contribution Guidelines
 
