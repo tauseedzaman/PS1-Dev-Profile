@@ -53,32 +53,6 @@ function GitPush {
         return
     }
 
-    # Check if .git folder exists in the current directory
-    $GitFolderPath = Get-Location
-    if (-not (Test-Path -Path (Join-Path -Path $GitFolderPath -ChildPath ".git"))) {
-        Write-Host "Git repository not found in the current directory."
-        return
-    }
-
-    # Read repository name from .git/config file
-    $ConfigPath = Join-Path -Path $GitFolderPath -ChildPath ".git\config"
-    $Repository = $null
-
-    $content = Get-Content $ConfigPath
-
-    foreach ($line in $content) {
-        if ($line -match "url = .+/(.+)\.git") {
-            $Repository = $matches[1]
-            break
-        }
-    }
-
-    # If repository name is not found, exit
-    if (-not $Repository) {
-        Write-Host "Repository name not found."
-        return
-    }
-
     # Execute Git commands
     git add .
     git commit -m $CommitMessage 
@@ -279,6 +253,21 @@ function GoTo-Folder {
     Set-Location $matchedDirs[0]
 }
 
+# other methods
+function Open-Explorer { explorer.exe . }
+function Go-Back { cd .. }
+function Make-Dir-And-Go {
+    param([string]$DirectoryName) 
+    # Check if DirectoryName is provided
+    if (-not $DirectoryName) {
+        Write-Host "Please provide a directory name."
+        return
+    }
+
+    mkdir $DirectoryName; 
+    cd $DirectoryName 
+}
+
 
 #================================================
 #                Aliases
@@ -292,3 +281,6 @@ Set-Alias -Name phpserver -Value PHP-Server -Description "Start PHP built-in web
 Set-Alias -Name pyserver -Value py-server -Description "Start Python HTTP server"
 Set-Alias -Name gt -Value GoTo-Folder -Description "Navigates to a specified folder based on partial name."
 Set-Alias -Name Scane-Folders -Value Update-FolderPaths -Description "Scans the user's home directory and stores folder paths in a file."
+Set-Alias -Name ex -Value Open-Explorer -Description "Open current directory in File Explorer"
+Set-Alias -Name b -Value Go-Back -Description "Go back to the previous directory"
+Set-Alias -Name mkg -Value Make-Dir-And-Go -Description "Create a directory and navigate into it"

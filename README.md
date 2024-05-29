@@ -14,6 +14,9 @@ This repository contains a collection of useful PowerShell functions and aliases
 6. [phpserver](#phpserver)
 7. [pyserver](#pyserver)
 8. [gt](#gt)
+9. [ex](#ex)
+10. [b](#b)
+11. [mkg](#mkg)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -114,6 +117,28 @@ Suppose you want to navigate to a folder named "Documents" within your user dire
 gt Documents
 ```
 If multiple folders with "Documents" in their names exist, `gt` will display them and prompt you to select the desired one. After selecting, you will be navigated to the chosen folder
+
+#### 💻<a name="ex"></a>Open current directory in File Explorer
+
+```sh
+ex
+```
+Opens the current working directory in File Explorer
+
+#### 💻<a name="b"></a>Go one step back to prev directory.. its like `cd ..`
+
+```sh
+b
+```
+Go back to the previous directory
+
+#### 💻<a name="mkg"></a>Create a directory and navigate to it
+
+```sh
+mkg <directory-name>
+```
+Create a directory with provided name and navigates into it
+
 
 ## Contribution Guidelines
 
