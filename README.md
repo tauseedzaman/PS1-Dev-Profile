@@ -17,6 +17,8 @@ This repository contains a collection of useful PowerShell functions and aliases
 9. [ex](#ex)
 10. [b](#b)
 11. [mkg](#mkg)
+12. [head](#head)
+13. [tail](#tail)
 
 ## Usage
 To start using the PowerShell Developer Profile, follow these steps:
@@ -138,6 +140,20 @@ Go back to the previous directory
 mkg <directory-name>
 ```
 Create a directory with provided name and navigates into it
+
+#### 💻<a name="head"></a>Display the first few lines of a file
+
+```sh
+head <file-path> <lines-count>
+```
+Display the first few lines of a file, the number of line showed by default is 10.
+
+#### 💻<a name="head"></a>Display the last few lines of a file
+
+```sh
+tail <file-path> <lines-count>
+```
+Display the last few lines of a file, the number of line showed by default is 10.
 
 
 ## Contribution Guidelines

@@ -268,6 +268,33 @@ function Make-Dir-And-Go {
     cd $DirectoryName 
 }
 
+function _head {
+    param(
+        [string]$file,
+        [int]$count = 10
+    )
+  
+    if (!(Test-Path -Path $file)) {
+        Write-Error "File not found: $file"
+        return
+    }
+  
+    Get-Content -Path $file -TotalCount $count
+}
+  
+function _tail {
+    param(
+        [string]$file,
+        [int]$count = 10
+    )
+  
+    if (!(Test-Path -Path $file)) {
+        Write-Error "File not found: $file"
+        return
+    }
+  
+    Get-Content -Path $file -Tail $count
+}
 
 #================================================
 #                Aliases
@@ -284,3 +311,5 @@ Set-Alias -Name Scane-Folders -Value Update-FolderPaths -Description "Scans the 
 Set-Alias -Name ex -Value Open-Explorer -Description "Open current directory in File Explorer"
 Set-Alias -Name b -Value Go-Back -Description "Go back to the previous directory"
 Set-Alias -Name mkg -Value Make-Dir-And-Go -Description "Create a directory and navigate into it"
+Set-Alias -Name head -Value _head -Description "Display the first few lines of a file"
+Set-Alias -Name tail -Value _tail -Description "Display the last few lines of a file"
