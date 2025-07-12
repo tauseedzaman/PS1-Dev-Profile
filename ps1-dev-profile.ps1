@@ -4,12 +4,69 @@
 
 <#
 .SYNOPSIS
+    downloads file using Background Intelligent Transfer Service BITS 
+.NOTES
+    Author: tauseedzaman
+    Date: 12/07/2025
+#>
+function  Start-FileDownload {
+    param (
+        [Parameter(Mandatory)]
+        [string]$Url,
+
+        [string]$Destination,
+
+        [string]$DisplayName
+    )
+
+    try {
+        # if url is not valid show error
+        if (-not $Url -or $Url -notmatch '^(http|https)://') {
+            Write-Host "Invalid URL provided. Please provide a valid URL." -ForegroundColor Red
+            return
+        }
+        
+        # Infer destination path if not provided
+        if (-not $Destination) {
+            $fileName = [System.IO.Path]::GetFileName($Url)
+            $downloadsFolder = Join-Path -Path ([Environment]::GetFolderPath("UserProfile")) -ChildPath "Downloads"
+            $Destination = Join-Path -Path $downloadsFolder -ChildPath $fileName
+        }
+
+        # Infer display name from filename if not provided
+        if (-not $DisplayName) {
+            $DisplayName = [System.IO.Path]::GetFileName($Destination)
+            $DisplayName = $DisplayName -replace '-', ' ' -replace '_', ' '
+            $DisplayName = $DisplayName.Substring(0, 1).ToUpper() + $DisplayName.Substring(1)
+        }
+
+        # Create destination folder if needed
+        $destFolder = Split-Path -Path $Destination
+        if (-not (Test-Path $destFolder)) {
+            New-Item -ItemType Directory -Path $destFolder -Force | Out-Null
+        }
+
+        Write-Host "`nStarting download: $DisplayName" -ForegroundColor Cyan
+        Write-Host "Source:      $Url"
+        Write-Host "Destination: $Destination"
+
+        Start-BitsTransfer -Source $Url -Destination $Destination -DisplayName $DisplayName -Description "Downloading File to $Destination" -ErrorAction Stop
+
+        Write-Host "Download completed: $DisplayName" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Download failed: $_" -ForegroundColor Red
+    }
+}
+
+<#
+.SYNOPSIS
     Copies the current working directory path to the clipboard.
 .NOTES
     Author: tauseedzaman
     Date: 14/05/2024
 #>
-function Copy-CurrentPathToClipboard {
+function Copy-PathToClipboard {
     Get-Location | Set-Clipboard
 }
 
@@ -20,7 +77,7 @@ function Copy-CurrentPathToClipboard {
     Author: tauseedzaman
     Date: 15/05/2024
 #>
-function Start-laravelDevelopmentServer {
+function Start-LaravelServer {
     php artisan serve
 }
 
@@ -31,7 +88,7 @@ function Start-laravelDevelopmentServer {
     Author: tauseedzaman
     Date: 15/05/2024
 #>
-function Start-ArtisanCommand {
+function Invoke-Artisan {
     php artisan $args
 }
 
@@ -42,7 +99,7 @@ function Start-ArtisanCommand {
     Author: tauseedzaman
     Date: 15/05/2024
 #>
-function GitPush {
+function Push-GitChanges {
     param(
         [string]$CommitMessage
     )
@@ -66,7 +123,7 @@ function GitPush {
     Author: tauseedzaman
     Date: 23/05/2024
 #>
-function createfile {
+function New-File {
     param(
         [string]$fileName = "tmp.txt"
     )
@@ -86,7 +143,7 @@ function createfile {
     Author: tauseedzaman
     Date: 23/05/2024
 #>
-function PHP-Server {
+function Start-phpserve {
     param(
         [string]$port = 8080
     )
@@ -100,7 +157,7 @@ function PHP-Server {
     Author: tauseedzaman
     Date: 23/05/2024
 #>
-function py-server {
+function Start-PythonServer {
     param(
         [int]$port = 8080
     )
@@ -114,7 +171,7 @@ function py-server {
     Author: tauseedzaman
     Date: 25/05/2024
 #>
-function Update-FolderPaths {
+function Index-Folders {
     $userHome = [Environment]::GetFolderPath("UserProfile")
     $outputFile = Join-Path $userHome "folderPaths.txt"
     $excludeDirs = @(
@@ -191,7 +248,7 @@ function Update-FolderPaths {
     Author: tauseedzaman
     Date: 25/05/2024
 #>
-function GoTo-Folder {
+function Find-AndOpenFolder {
     param(
         [string]$DirectoryName
     )
@@ -254,9 +311,9 @@ function GoTo-Folder {
 }
 
 # other methods
-function Open-Explorer { explorer.exe . }
-function Go-Back { cd .. }
-function Make-Dir-And-Go {
+function Open-InExplorer { explorer.exe . }
+function Go-PreviousDirectory { cd .. }
+function New-AndEnterFolder {
     param([string]$DirectoryName) 
     # Check if DirectoryName is provided
     if (-not $DirectoryName) {
@@ -268,7 +325,7 @@ function Make-Dir-And-Go {
     cd $DirectoryName 
 }
 
-function _head {
+function Get-FileHead {
     param(
         [string]$file,
         [int]$count = 10
@@ -282,7 +339,7 @@ function _head {
     Get-Content -Path $file -TotalCount $count
 }
   
-function _tail {
+function Get-FileTail {
     param(
         [string]$file,
         [int]$count = 10
@@ -299,17 +356,18 @@ function _tail {
 #================================================
 #                Aliases
 #================================================
-Set-Alias -Name cpwd -Value Copy-CurrentPathToClipboard -Description "Copy current working directory path to clipboard"
-Set-Alias -Name pas -Value Start-laravelDevelopmentServer -Description "Starts laravel development server"
-Set-Alias -Name pa -Value Start-ArtisanCommand -Description "runs php artisan in laravel project."
-Set-Alias -Name gpush -Value GitPush -Description "used to push git changes with one command passing message as a argument."
-Set-Alias -Name touch -Value createfile -Description "create file if not argument is provided then temp.txt is created."
-Set-Alias -Name phpserver -Value PHP-Server -Description "Start PHP built-in web server"
-Set-Alias -Name pyserver -Value py-server -Description "Start Python HTTP server"
-Set-Alias -Name gt -Value GoTo-Folder -Description "Navigates to a specified folder based on partial name."
-Set-Alias -Name Scane-Folders -Value Update-FolderPaths -Description "Scans the user's home directory and stores folder paths in a file."
-Set-Alias -Name ex -Value Open-Explorer -Description "Open current directory in File Explorer"
-Set-Alias -Name b -Value Go-Back -Description "Go back to the previous directory"
-Set-Alias -Name mkg -Value Make-Dir-And-Go -Description "Create a directory and navigate into it"
-Set-Alias -Name head -Value _head -Description "Display the first few lines of a file"
-Set-Alias -Name tail -Value _tail -Description "Display the last few lines of a file"
+Set-Alias -Name cpwd -Value Copy-PathToClipboard -Description "Copy current working directory path to clipboard"
+Set-Alias -Name pas -Value Start-LaravelServer -Description "Starts laravel development server"
+Set-Alias -Name pa -Value Invoke-Artisan -Description "runs php artisan in laravel project."
+Set-Alias -Name gpush -Value Push-GitChanges -Description "used to push git changes with one command passing message as a argument."
+Set-Alias -Name touch -Value New-File -Description "create file if not argument is provided then temp.txt is created."
+Set-Alias -Name phpserve -Value Start-phpserve -Description "Start PHP built-in web server"
+Set-Alias -Name pyserve -Value Start-PythonServer -Description "Start Python HTTP server"
+Set-Alias -Name gt -Value Find-AndOpenFolder -Description "Navigates to a specified folder based on partial name."
+Set-Alias -Name Scane-Folders -Value Index-Folders -Description "Scans the user's home directory and stores folder paths in a file."
+Set-Alias -Name ex -Value Open-InExplorer -Description "Open current directory in File Explorer"
+Set-Alias -Name b -Value Go-PreviousDirectory -Description "Go back to the previous directory"
+Set-Alias -Name mkg -Value New-AndEnterFolder -Description "Create a directory and navigate into it"
+Set-Alias -Name head -Value Get-FileHead -Description "Display the first few lines of a file"
+Set-Alias -Name tail -Value Get-FileTail -Description "Display the last few lines of a file"
+Set-Alias -Name dl -Value  Start-FileDownload -Description "Download a file using BITS"
