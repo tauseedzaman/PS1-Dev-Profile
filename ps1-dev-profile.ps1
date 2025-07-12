@@ -118,7 +118,7 @@ function Push-GitChanges {
 
 <#
 .SYNOPSIS
-    create file. if not argument is provided then temp.txt is created.
+    create file. if not argument is provided then tmp.txt is created.
 .NOTES
     Author: tauseedzaman
     Date: 23/05/2024
@@ -360,7 +360,7 @@ Set-Alias -Name cpwd -Value Copy-PathToClipboard -Description "Copy current work
 Set-Alias -Name pas -Value Start-LaravelServer -Description "Starts laravel development server"
 Set-Alias -Name pa -Value Invoke-Artisan -Description "runs php artisan in laravel project."
 Set-Alias -Name gpush -Value Push-GitChanges -Description "used to push git changes with one command passing message as a argument."
-Set-Alias -Name touch -Value New-File -Description "create file if not argument is provided then temp.txt is created."
+Set-Alias -Name touch -Value New-File -Description "create file if not argument is provided then tmp.txt is created."
 Set-Alias -Name phpserve -Value Start-phpserve -Description "Start PHP built-in web server"
 Set-Alias -Name pyserve -Value Start-PythonServer -Description "Start Python HTTP server"
 Set-Alias -Name gt -Value Find-AndOpenFolder -Description "Navigates to a specified folder based on partial name."

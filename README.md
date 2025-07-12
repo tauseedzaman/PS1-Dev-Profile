@@ -18,7 +18,7 @@ This repository contains a collection of useful PowerShell functions and aliases
 4. **[`gpush`](#gpush)** — Push git changes with a commit message  
    → `Push-GitChanges`
 
-5. **[`touch`](#touch)** — Creates a file (defaults to `temp.txt` if no name provided)  
+5. **[`touch`](#touch)** — Creates a file (defaults to `tmp.txt` if no name provided)  
    → `New-File`
 
 6. **[`phpserve`](#phpserve)** — Starts PHP built-in web server  
@@ -110,7 +110,7 @@ Pushes local Git changes to the remote repository with a custom commit message, 
 ```sh
 touch <filename>
 ```
-create file if not argument is provided then temp.txt is created.
+create file if not argument is provided then tmp.txt is created.
 
 #### ⭕ <a name="phpserve">Start PHP built-in web server</a>
 
